@@ -8,7 +8,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -17,11 +16,9 @@ import java.util.Optional;
 @RequestMapping("/flower/client")
 public class FlowerClientController {
     final FlowerClientService flowerClientService;
-    private final UrlString urlString;
 
-    public FlowerClientController(FlowerClientService flowerClientService, UrlString urlString) {
+    public FlowerClientController(FlowerClientService flowerClientService) {
         this.flowerClientService = flowerClientService;
-        this.urlString = urlString;
     }
 
     @Operation(
@@ -126,8 +123,8 @@ public class FlowerClientController {
         }
     }
     /* This inner class contains all endpoints strings. Static access */
-    @Component
-    public static class UrlString {
+
+    private static class UrlString {
         public static final String ADD_URL = "/add";
         public static final String UPDATE_URL = "/update/{id}";
         public static final String DELETE_URL = "/delete/{id}";
