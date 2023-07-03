@@ -3,7 +3,7 @@ package cat.itacademy.barcelonactiva.llombartroma.toni.s05.t01.n03.S05T01N03Llom
 import lombok.*;
 import nonapi.io.github.classgraph.json.Id;
 
-@Data
+
 @ToString(callSuper = true)
 @EqualsAndHashCode
 public class FlowerClient {

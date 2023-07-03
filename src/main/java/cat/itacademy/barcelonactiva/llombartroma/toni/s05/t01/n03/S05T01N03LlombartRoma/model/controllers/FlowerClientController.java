@@ -16,8 +16,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/flower/client")
 public class FlowerClientController {
-    final
-    FlowerClientService flowerClientService;
+    final FlowerClientService flowerClientService;
     private final UrlString urlString;
 
     public FlowerClientController(FlowerClientService flowerClientService, UrlString urlString) {
@@ -33,7 +32,7 @@ public class FlowerClientController {
             @ApiResponse(responseCode = "201", description = "Flower added successfully"),
             @ApiResponse(responseCode = "204", description = "No content")
     })
-    @PostMapping(UrlString.addUrl)
+    @PostMapping(UrlString.ADD_URL)
     public ResponseEntity<FlowerClientDTO> add( @RequestBody FlowerClient flowerClient) {
         try {
             Optional<FlowerClientDTO> optionalFlower = flowerClientService.add(flowerClient);
@@ -42,7 +41,7 @@ public class FlowerClientController {
             } else {
                 throw new FlowerClientNotFoundException();
             }
-        } catch (Exception e) {
+        } catch (FlowerClientNotFoundException e) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
     }
@@ -55,7 +54,7 @@ public class FlowerClientController {
             @ApiResponse(responseCode = "201", description = "Flower updated successfully"),
             @ApiResponse(responseCode = "204", description = "No content")
     })
-    @PutMapping(UrlString.updateUrl)
+    @PutMapping(UrlString.UPDATE_URL)
     public ResponseEntity<FlowerClientDTO> update( @RequestBody FlowerClient flowerClient, @PathVariable int id) {
         try {
             Optional<FlowerClientDTO> optionalFlower = flowerClientService.update(flowerClient, id);
@@ -64,7 +63,7 @@ public class FlowerClientController {
             } else {
                 throw new FlowerClientNotFoundException();
             }
-        } catch (Exception e) {
+        } catch (FlowerClientNotFoundException e) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
     }
@@ -77,7 +76,7 @@ public class FlowerClientController {
             @ApiResponse(responseCode = "201", description = "Flower deleted successfully"),
             @ApiResponse(responseCode = "204", description = "No content")
     })
-    @DeleteMapping(UrlString.deleteUrl)
+    @DeleteMapping(UrlString.DELETE_URL)
     public ResponseEntity<FlowerClientDTO> delete(@PathVariable int id) {
         Optional<FlowerClientDTO> optionalFlower = flowerClientService.delete(id);
         try {
@@ -86,7 +85,7 @@ public class FlowerClientController {
             } else {
                 throw new FlowerClientNotFoundException();
             }
-        } catch (Exception e) {
+        } catch (FlowerClientNotFoundException e) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
     }
@@ -95,7 +94,7 @@ public class FlowerClientController {
             summary = "Retrieve a flower",
             tags = { "Retrieving a single flower" }
     )
-    @GetMapping(UrlString.getOneUrl)
+    @GetMapping(UrlString.GET_ONE_URL)
     public ResponseEntity<FlowerClientDTO> getOne(@PathVariable int id) {
         Optional<FlowerClientDTO> optionalFlower = flowerClientService.getOne(id);
         try {
@@ -104,7 +103,7 @@ public class FlowerClientController {
             } else {
                 throw new FlowerClientNotFoundException();
             }
-        } catch (Exception e) {
+        } catch (FlowerClientNotFoundException e) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
     }
@@ -113,7 +112,7 @@ public class FlowerClientController {
             summary = "Get all flowers",
             tags = { "Retrieving all flowers" }
     )
-    @GetMapping(UrlString.getAllUrl)
+    @GetMapping(UrlString.GET_ALL_URL)
     public ResponseEntity<FlowerClientDTO[]> getAll() {
         Optional<FlowerClientDTO[]> optionalFlowers = flowerClientService.getAll();
         try {
@@ -122,17 +121,17 @@ public class FlowerClientController {
             } else {
                 throw new FlowerClientNotFoundException();
             }
-        } catch (Exception e) {
+        } catch (FlowerClientNotFoundException e) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
     }
     /* This inner class contains all endpoints strings. Static access */
     @Component
     public static class UrlString {
-        public static final String addUrl = "/add";
-        public static final String updateUrl = "/update/{id}";
-        public static final String deleteUrl = "/delete/{id}";
-        public static final String getOneUrl = "/getOne/{id}";
-        public static final String getAllUrl = "/getAll";
+        public static final String ADD_URL = "/add";
+        public static final String UPDATE_URL = "/update/{id}";
+        public static final String DELETE_URL = "/delete/{id}";
+        public static final String GET_ONE_URL = "/getone/{id}";
+        public static final String GET_ALL_URL = "/getall";
     }
 }

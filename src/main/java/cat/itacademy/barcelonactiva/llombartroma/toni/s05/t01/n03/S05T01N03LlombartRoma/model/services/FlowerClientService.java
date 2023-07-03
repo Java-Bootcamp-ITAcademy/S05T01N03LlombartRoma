@@ -64,7 +64,7 @@ public class FlowerClientService {
         public static final String addUrl = "http://localhost:9001/flower/add";
         public static final String updateUrl = "http://localhost:9001/flower/update/";
         public static final String deleteUrl = "http://localhost:9001/flower/delete/";
-        public static final String getOneUrl = "http://localhost:9001/flower/getOne/";
-        public static final String getAllUrl = "http://localhost:9001/flower/getAll";
+        public static final String getOneUrl = "http://localhost:9001/flower/getone/";
+        public static final String getAllUrl = "http://localhost:9001/flower/getall";
     }
 }

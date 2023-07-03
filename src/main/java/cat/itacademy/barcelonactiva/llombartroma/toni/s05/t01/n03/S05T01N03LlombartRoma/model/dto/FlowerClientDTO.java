@@ -6,7 +6,7 @@ import lombok.Setter;
 
 import java.util.Arrays;
 import java.util.List;
-@Data
+
 public class FlowerClientDTO {
     private static final List<String> euCountries = Arrays.asList(
         "Austria",
